@@ -1,0 +1,21 @@
+//
+//  BKWebRTC.pch
+//  BKWebRTC
+//
+//  Created by 田进峰 on 2017/6/2.
+//  Copyright © 2017年 CloudRoom. All rights reserved.
+//
+
+#ifndef BKWebRTC_pch
+#define BKWebRTC_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef DEBUG
+    #define BKLog(...) NSLog(@"%s %@", __func__, [NSString stringWithFormat:__VA_ARGS__])
+#else
+    #define BKLog(...)
+#endif
+
+#endif /* BKWebRTC_pch */
