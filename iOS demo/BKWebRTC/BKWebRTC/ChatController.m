@@ -14,9 +14,10 @@
 #define KScreenHeight [UIScreen mainScreen].bounds.size.height
 
 #define KVideoWidth KScreenWidth / 3.0
-#define KVideoHeight KVideoWidth * 320 / 240
+#define KVideoHeight KVideoWidth
+// #define KVideoHeight KVideoWidth * 320 / 240
 
-@interface ChatController () <WebRTCHelperDelegate>
+@interface ChatController () <WebRTCHelperDelegate, RTCEAGLVideoViewDelegate>
 
 @property (nonatomic, strong) RTCVideoTrack *localVideoTrack; /**< 本地摄像头追踪 */
 @property (nonatomic, strong) NSMutableDictionary <NSString *, RTCVideoTrack *> *remoteVideoTracks; /**< 远程的视频追踪 */
@@ -40,6 +41,8 @@
     RTCEAGLVideoView *localView = [[RTCEAGLVideoView alloc] initWithFrame:CGRectMake(0, 20, KVideoWidth, KVideoHeight)];
     // 标记本地摄像头
     [localView setTag:10086];
+    // FIXME: 实现本地/远程图像不被拉伸变形 201706201812 by king
+    [localView setDelegate:self];
     _localVideoTrack = [stream.videoTracks lastObject];
     [_localVideoTrack addRenderer:localView];
     [self.view addSubview:localView];
@@ -57,6 +60,32 @@
     BKLog(@"connectionID:%@", connectionID);
     [_remoteVideoTracks removeObjectForKey:connectionID];
     [self _refreshRemoteView];
+}
+
+#pragma mark - RTCEAGLVideoViewDelegate
+- (void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size
+{
+    BKLog(@"videoView.tag:%zd", videoView.tag);
+    
+    if (size.width > 0 && size.height > 0) {
+        // Aspect fill remote video into bounds.
+        CGRect bounds = videoView.bounds;
+        CGRect videoFrame = AVMakeRectWithAspectRatioInsideRect(size, videoView.bounds);
+        CGFloat scale = 1;
+        
+        if (videoFrame.size.width > videoFrame.size.height) {
+            // Scale by height.
+            scale = bounds.size.height / videoFrame.size.height;
+        } else {
+            // Scale by width.
+            scale = bounds.size.width / videoFrame.size.width;
+        }
+        
+        videoFrame.size.height *= scale;
+        videoFrame.size.width *= scale;
+        [videoView setBounds:(CGRect){0, 0, videoFrame.size.width, videoFrame.size.height}];
+        [videoView setCenter:(CGPoint){videoView.center.x + (videoFrame.size.width - bounds.size.width) * 0.5, videoView.center.y + (videoFrame.size.height - bounds.size.height) * 0.5}];
+    }
 }
 
 #pragma mark - selector
@@ -103,6 +132,8 @@
     // 再去添加
     [_remoteVideoTracks enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, RTCVideoTrack *remoteTrack, BOOL * _Nonnull stop) {
         RTCEAGLVideoView *remoteVideoView = [[RTCEAGLVideoView alloc] initWithFrame:CGRectMake(column * KVideoWidth, 20, KVideoWidth, KVideoHeight)];
+        // FIXME: 实现本地/远程图像不被拉伸变形 201706201812 by king
+        [remoteVideoView setDelegate:self];
         [remoteTrack addRenderer:remoteVideoView];
         [self.view addSubview:remoteVideoView];
         
