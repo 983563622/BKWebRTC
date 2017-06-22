@@ -205,6 +205,7 @@ static WebRTCHelper *shareInstance;
 /** 1. 客户端与服务器建立WebSocket连接 */
 - (void)connect:(NSString *)host port:(NSString *)port room:(NSString *)room
 {
+    BKLog(@"");
     NSParameterAssert(host);
     NSParameterAssert(port);
     NSParameterAssert(room);
@@ -219,6 +220,7 @@ static WebRTCHelper *shareInstance;
 /** 6. 用户离开页面,关闭WebSocket连接 */
 - (void)close
 {
+    BKLog(@"");
     _localStream = nil;
     [_peerConnectionIDS enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self _closeConnection:obj];
@@ -229,6 +231,8 @@ static WebRTCHelper *shareInstance;
 #pragma mark - private method
 - (void)_setup
 {
+    BKLog(@"");
+    
     if (!_peerConnections) {
         _peerConnections = [NSMutableDictionary dictionary];
     }
@@ -243,6 +247,8 @@ static WebRTCHelper *shareInstance;
 
 - (void)_setupForSocket
 {
+    BKLog(@"");
+    
     if (_socket) {
         [_socket close];
         _socket = nil;
@@ -258,6 +264,8 @@ static WebRTCHelper *shareInstance;
 
 - (void)_setupForFactory
 {
+    BKLog(@"");
+    
     if (!_factory) {
         _factory = [[RTCPeerConnectionFactory alloc] init];
     }
@@ -265,6 +273,8 @@ static WebRTCHelper *shareInstance;
 
 - (void)_setupForLocalStream
 {
+    BKLog(@"");
+    
     if (!_localStream) {
         // 设置点对点工厂
         [self _setupForFactory];
@@ -323,37 +333,41 @@ static WebRTCHelper *shareInstance;
 
 - (RTCMediaConstraints *)_setupForLocalVideoConstraints
 {
-    NSDictionary *mandatory = @{@"maxWidth" : @"640",
-                                @"minWidth" : @"640",
-                                @"maxHeight" : @"480",
-                                @"minHeight" : @"480",
-                                @"minFrameRate" : @"25"};
+    BKLog(@"");
+    NSDictionary *mandatory = @{kRTCMediaConstraintsMaxWidth : @"640",
+                                kRTCMediaConstraintsMinWidth : @"640",
+                                kRTCMediaConstraintsMaxHeight : @"480",
+                                kRTCMediaConstraintsMinHeight : @"480",
+                                kRTCMediaConstraintsMinFrameRate : @"25"};
     RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatory optionalConstraints:nil];
     return constraints;
 }
 
 - (RTCMediaConstraints *)_setupForPeerVideoConstraints
 {
-    NSDictionary *mandatory = @{@"maxWidth" : @"640",
-                                @"minWidth" : @"640",
-                                @"maxHeight" : @"480",
-                                @"minHeight" : @"480",
-                                @"minFrameRate" : @"15"};
-    NSDictionary *optional = @{@"DtlsSrtpKeyAgreement" : @"true"};
+    BKLog(@"");
+    NSDictionary *mandatory = @{kRTCMediaConstraintsMaxWidth : @"640",
+                                kRTCMediaConstraintsMinWidth : @"640",
+                                kRTCMediaConstraintsMaxHeight : @"480",
+                                kRTCMediaConstraintsMinHeight : @"480",
+                                kRTCMediaConstraintsMinFrameRate : @"25"};
+    NSDictionary *optional = @{@"DtlsSrtpKeyAgreement" : kRTCMediaConstraintsValueTrue};
     RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatory optionalConstraints:optional];
     return constraints;
 }
 
 - (RTCMediaConstraints *)_setupForOfferOrAnswerConstraint
 {
-    NSDictionary *mandatory = @{@"OfferToReceiveAudio" : @"true",
-                                @"OfferToReceiveVideo" : @"true"};
+    BKLog(@"");
+    NSDictionary *mandatory = @{kRTCMediaConstraintsOfferToReceiveAudio : kRTCMediaConstraintsValueTrue,
+                                kRTCMediaConstraintsOfferToReceiveVideo : kRTCMediaConstraintsValueTrue};
     RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatory optionalConstraints:nil];
     return constraints;
 }
 
 - (void)_setupForConnections
 {
+    BKLog(@"");
     [_peerConnectionIDS enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         RTCPeerConnection *connection = [self _createConnection:obj];
         [_peerConnections setObject:connection forKey:obj];
@@ -362,6 +376,8 @@ static WebRTCHelper *shareInstance;
 
 - (void)_setupForIceServers
 {
+    BKLog(@"");
+    
     if (!_iceServers) {
         _iceServers = [NSMutableArray array];
         [_iceServers addObject:[self _setupForIceServer:RTCSTUNServerURL ]];
@@ -371,11 +387,13 @@ static WebRTCHelper *shareInstance;
 
 - (RTCIceServer *)_setupForIceServer:(NSString *)stunURL
 {
+    BKLog(@"");
     return [[RTCIceServer alloc] initWithURLStrings:@[stunURL] username:@"" credential:@""];
 }
 
 - (RTCPeerConnection *)_createConnection:(NSString *)connectionID
 {
+    BKLog(@"");
     [self _setupForFactory];
     [self _setupForIceServers];
     RTCConfiguration *configuration = [[RTCConfiguration alloc] init];
@@ -385,6 +403,7 @@ static WebRTCHelper *shareInstance;
 
 - (void)_closeConnection:(NSString *)connectionID
 {
+    BKLog(@"");
     RTCPeerConnection *connection = [_peerConnections objectForKey:connectionID];
     
     if (connection) {
@@ -402,6 +421,8 @@ static WebRTCHelper *shareInstance;
 
 - (void)_join:(NSString *)room
 {
+    BKLog(@"");
+    
     if (_socket.readyState == SR_OPEN) {
         NSDictionary *dic = @{@"eventName": @"__join", @"data": @{@"room": room}};
         NSData *para = [dic mj_JSONData];
@@ -412,11 +433,16 @@ static WebRTCHelper *shareInstance;
 
 - (void)_addToConnectionIDS:(NSArray *)connections
 {
+    BKLog(@"");
+    [connections enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        BKLog(@"%@", obj);
+    }];
     [_peerConnectionIDS addObjectsFromArray:connections];
 }
 
 - (void)_addLocalStreamToConnections
 {
+    BKLog(@"");
     [_peerConnections enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, RTCPeerConnection * _Nonnull obj, BOOL * _Nonnull stop) {
         [self _setupForLocalStream];
         [obj addStream:_localStream];
@@ -425,6 +451,7 @@ static WebRTCHelper *shareInstance;
 
 - (void)_sendSDPOffersToConnections
 {
+    BKLog(@"");
     [_peerConnections enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, RTCPeerConnection * _Nonnull obj, BOOL * _Nonnull stop) {
         [self _sendSDPOfferToConnection:obj];
     }];
@@ -432,6 +459,7 @@ static WebRTCHelper *shareInstance;
 
 - (void)_sendSDPOfferToConnection:(RTCPeerConnection *)connection
 {
+    BKLog(@"");
     _role = RoleCaller;
     /** Generate an SDP offer. */
     [connection offerForConstraints:[self _setupForOfferOrAnswerConstraint] completionHandler:^(RTCSessionDescription * _Nullable sdp, NSError * _Nullable error) {
@@ -486,7 +514,7 @@ static WebRTCHelper *shareInstance;
 
 - (void)_didSetSessionDescription:(RTCPeerConnection *)connection
 {
-    BKLog(@"signalingState:%zd", connection.signalingState);
+    BKLog(@"signalingState:%zd role:%zd", connection.signalingState, _role);
     NSString *connectionID = [self _findConnectionID:connection];
 
     if (connection.signalingState == RTCSignalingStateHaveRemoteOffer) { // 新人进入房间就调(远端发起 offer)

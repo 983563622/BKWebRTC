@@ -15,7 +15,6 @@
 
 #define KVideoWidth KScreenWidth / 3.0
 #define KVideoHeight KVideoWidth
-// #define KVideoHeight KVideoWidth * 320 / 240
 
 @interface ChatController () <WebRTCHelperDelegate, RTCEAGLVideoViewDelegate>
 
@@ -65,7 +64,7 @@
 #pragma mark - RTCEAGLVideoViewDelegate
 - (void)videoView:(RTCEAGLVideoView *)videoView didChangeVideoSize:(CGSize)size
 {
-    BKLog(@"videoView.tag:%zd", videoView.tag);
+    BKLog(@"videoView.tag:%zd size:%@", videoView.tag, NSStringFromCGSize(size));
     
     if (size.width > 0 && size.height > 0) {
         // Aspect fill remote video into bounds.
