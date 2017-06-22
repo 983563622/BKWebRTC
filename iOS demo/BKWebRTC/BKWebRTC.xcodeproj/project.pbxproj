@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C22C905C1EFBA79800402BC2 /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2AFEA961EE69562000F8924 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C2AFEA7D1EE6944C000F8924 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEA7C1EE6944C000F8924 /* main.m */; };
 		C2AFEA801EE6944C000F8924 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEA7F1EE6944C000F8924 /* AppDelegate.m */; };
 		C2AFEA831EE6944C000F8924 /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEA821EE6944C000F8924 /* RootController.m */; };
@@ -14,7 +15,7 @@
 		C2AFEA881EE6944C000F8924 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AFEA871EE6944C000F8924 /* Assets.xcassets */; };
 		C2AFEA8B1EE6944C000F8924 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2AFEA891EE6944C000F8924 /* LaunchScreen.storyboard */; };
 		C2AFEA941EE694BA000F8924 /* ChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEA931EE694BA000F8924 /* ChatController.m */; };
-		C2AFEA971EE69562000F8924 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2AFEA961EE69562000F8924 /* WebRTC.framework */; };
+		C2AFEA971EE69562000F8924 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2AFEA961EE69562000F8924 /* WebRTC.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C2AFEACB1EE6989E000F8924 /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEAB41EE6989E000F8924 /* MJExtensionConst.m */; };
 		C2AFEACC1EE6989E000F8924 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEAB61EE6989E000F8924 /* MJFoundation.m */; };
 		C2AFEACD1EE6989E000F8924 /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEAB81EE6989E000F8924 /* MJProperty.m */; };
@@ -28,17 +29,16 @@
 		C2AFEAD51EE6989E000F8924 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEACA1EE6989E000F8924 /* SRWebSocket.m */; };
 		C2AFEAD91EE69912000F8924 /* WebRTCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEAD81EE69912000F8924 /* WebRTCHelper.m */; };
 		C2AFEAF21EE69A58000F8924 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C2AFEAF11EE69A58000F8924 /* libicucore.tbd */; };
-		C2AFEAF41EE69D15000F8924 /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2AFEA961EE69562000F8924 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C2AFEAF31EE69D07000F8924 /* CopyFiles */ = {
+		C22C905B1EFBA78F00402BC2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C2AFEAF41EE69D15000F8924 /* WebRTC.framework in CopyFiles */,
+				C22C905C1EFBA79800402BC2 /* WebRTC.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +222,7 @@
 				C2AFEA741EE6944C000F8924 /* Sources */,
 				C2AFEA751EE6944C000F8924 /* Frameworks */,
 				C2AFEA761EE6944C000F8924 /* Resources */,
-				C2AFEAF31EE69D07000F8924 /* CopyFiles */,
+				C22C905B1EFBA78F00402BC2 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -433,6 +433,7 @@
 				INFOPLIST_FILE = BKWebRTC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloudroom.BKWebRTC10010;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -453,6 +454,7 @@
 				INFOPLIST_FILE = BKWebRTC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloudroom.BKWebRTC10010;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -477,6 +479,7 @@
 				C2AFEA911EE6944C000F8924 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
