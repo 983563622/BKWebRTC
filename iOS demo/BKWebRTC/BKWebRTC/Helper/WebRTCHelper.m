@@ -179,10 +179,15 @@ static WebRTCHelper *shareInstance;
 /** New ice candidate has been found. */
 - (void)peerConnection:(RTCPeerConnection *)peerConnection didGenerateIceCandidate:(RTCIceCandidate *)candidate
 {
-    BKLog(@"");
+    BKLog(@"candidate.sdp:%@ candidate.sdpMid:%@ candidate.sdpMLineIndex:%d candidate.serverUrl:%@", candidate.sdp, candidate.sdpMid, candidate.sdpMLineIndex, candidate.serverUrl);
     /* 把自己的网络地址通过 socket 转发给对端*/
     NSString *connectionID = [self _findConnectionID:peerConnection];
-    NSDictionary *dic = @{@"eventName": @"__ice_candidate", @"data": @{@"id":candidate.sdpMid,@"label": [NSNumber numberWithInteger:candidate.sdpMLineIndex], @"candidate": candidate.sdp, @"socketId": connectionID}};
+    NSDictionary *dic = @{@"eventName" : @"__ice_candidate",
+                          @"data": @{@"id" : candidate.sdpMid,
+                                     @"label" : [NSNumber numberWithInteger:candidate.sdpMLineIndex],
+                                     @"candidate" : candidate.sdp,
+                                     @"socketId": connectionID}
+                          };
     
     if (_socket.readyState == SR_OPEN) {
         [_socket send:[dic mj_JSONData]];
@@ -431,7 +436,7 @@ static WebRTCHelper *shareInstance;
     }
 }
 
-- (void)_addToConnectionIDS:(NSArray *)connections
+- (void)_addToConnectionIDS:(NSArray <NSString *>*)connections
 {
     BKLog(@"");
     [connections enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -550,6 +555,7 @@ static WebRTCHelper *shareInstance;
                                   };
             
             if (_socket.readyState == SR_OPEN) {
+                BKLog(@"locationSDP:%@", dic);
                 [_socket send:[dic mj_JSONData]];
             }
         }
@@ -630,7 +636,7 @@ static WebRTCHelper *shareInstance;
  */
 - (void)_receiveAnswer:(NSMutableDictionary *)resultDic
 {
-    BKLog(@"");
+    BKLog(@"RemoteSDP:%@", resultDic);
     NSDictionary *dataDic = resultDic[@"data"];
     NSDictionary *sdpDic = dataDic[@"sdp"];
     NSString *sdp = sdpDic[@"sdp"];

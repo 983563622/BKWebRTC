@@ -100,7 +100,7 @@
 {
     WebRTCHelper *webRTCHelper = [WebRTCHelper shareInstance];
     // 修改为自己的本地服务器地址
-    [webRTCHelper connect:@"10.8.8.120" port:@"3000" room:@"100"];
+    [webRTCHelper connect:@"10.8.8.120" port:@"3000" room:@"100"]; // bossking10086.iok.la
     [webRTCHelper setDelegate:self];
     
     if (!_remoteVideoTracks) {

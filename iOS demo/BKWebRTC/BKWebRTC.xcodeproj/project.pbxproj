@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C22C905C1EFBA79800402BC2 /* WebRTC.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C2AFEA961EE69562000F8924 /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C23882461F03B2130009864E /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23882441F03B2040009864E /* WebRTC.framework */; };
+		C23882471F03B2130009864E /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C23882441F03B2040009864E /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C23882491F03B2850009864E /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C2AFEAF11EE69A58000F8924 /* libicucore.tbd */; };
 		C2AFEA7D1EE6944C000F8924 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEA7C1EE6944C000F8924 /* main.m */; };
 		C2AFEA801EE6944C000F8924 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEA7F1EE6944C000F8924 /* AppDelegate.m */; };
 		C2AFEA831EE6944C000F8924 /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEA821EE6944C000F8924 /* RootController.m */; };
@@ -15,7 +17,6 @@
 		C2AFEA881EE6944C000F8924 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AFEA871EE6944C000F8924 /* Assets.xcassets */; };
 		C2AFEA8B1EE6944C000F8924 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2AFEA891EE6944C000F8924 /* LaunchScreen.storyboard */; };
 		C2AFEA941EE694BA000F8924 /* ChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEA931EE694BA000F8924 /* ChatController.m */; };
-		C2AFEA971EE69562000F8924 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2AFEA961EE69562000F8924 /* WebRTC.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C2AFEACB1EE6989E000F8924 /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEAB41EE6989E000F8924 /* MJExtensionConst.m */; };
 		C2AFEACC1EE6989E000F8924 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEAB61EE6989E000F8924 /* MJFoundation.m */; };
 		C2AFEACD1EE6989E000F8924 /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEAB81EE6989E000F8924 /* MJProperty.m */; };
@@ -28,23 +29,24 @@
 		C2AFEAD41EE6989E000F8924 /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEAC61EE6989E000F8924 /* NSString+MJExtension.m */; };
 		C2AFEAD51EE6989E000F8924 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEACA1EE6989E000F8924 /* SRWebSocket.m */; };
 		C2AFEAD91EE69912000F8924 /* WebRTCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C2AFEAD81EE69912000F8924 /* WebRTCHelper.m */; };
-		C2AFEAF21EE69A58000F8924 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C2AFEAF11EE69A58000F8924 /* libicucore.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C22C905B1EFBA78F00402BC2 /* CopyFiles */ = {
+		C23882481F03B2130009864E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C22C905C1EFBA79800402BC2 /* WebRTC.framework in CopyFiles */,
+				C23882471F03B2130009864E /* WebRTC.framework in Embed Frameworks */,
 			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C23882441F03B2040009864E /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
 		C2AFEA781EE6944C000F8924 /* BKWebRTC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BKWebRTC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2AFEA7C1EE6944C000F8924 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C2AFEA7E1EE6944C000F8924 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -57,7 +59,6 @@
 		C2AFEA8C1EE6944C000F8924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2AFEA921EE694BA000F8924 /* ChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatController.h; sourceTree = "<group>"; };
 		C2AFEA931EE694BA000F8924 /* ChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatController.m; sourceTree = "<group>"; };
-		C2AFEA961EE69562000F8924 /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
 		C2AFEAB21EE6989E000F8924 /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
 		C2AFEAB31EE6989E000F8924 /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
 		C2AFEAB41EE6989E000F8924 /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
@@ -93,14 +94,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2AFEAF21EE69A58000F8924 /* libicucore.tbd in Frameworks */,
-				C2AFEA971EE69562000F8924 /* WebRTC.framework in Frameworks */,
+				C23882491F03B2850009864E /* libicucore.tbd in Frameworks */,
+				C23882461F03B2130009864E /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C23882431F03B1DB0009864E /* WebRTC */ = {
+			isa = PBXGroup;
+			children = (
+				C23882441F03B2040009864E /* WebRTC.framework */,
+			);
+			path = WebRTC;
+			sourceTree = "<group>";
+		};
 		C2AFEA6F1EE6944C000F8924 = {
 			isa = PBXGroup;
 			children = (
@@ -151,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				C2AFEAF11EE69A58000F8924 /* libicucore.tbd */,
-				C2AFEA961EE69562000F8924 /* WebRTC.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,6 +167,7 @@
 		C2AFEAB01EE69817000F8924 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				C23882431F03B1DB0009864E /* WebRTC */,
 				C2AFEAB11EE6989E000F8924 /* MJExtension-3.0.13 */,
 				C2AFEAC71EE6989E000F8924 /* SocketRocket-0.5.1 */,
 			);
@@ -222,7 +231,7 @@
 				C2AFEA741EE6944C000F8924 /* Sources */,
 				C2AFEA751EE6944C000F8924 /* Frameworks */,
 				C2AFEA761EE6944C000F8924 /* Resources */,
-				C22C905B1EFBA78F00402BC2 /* CopyFiles */,
+				C23882481F03B2130009864E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -427,6 +436,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/BKWebRTC/Vendor/WebRTC",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BKWebRTC/BKWebRTC.pch";
@@ -448,6 +458,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/BKWebRTC/Vendor/WebRTC",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BKWebRTC/BKWebRTC.pch";
