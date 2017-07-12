@@ -10,3 +10,5 @@ iOS真机:
 运行项目`iOS demo/BKWebRTC/BKWebRTC.xcodeproj`可看效果  
 浏览器:  
 输入:`http://localhost:3000/#100`可看效果
+#相关问题
+[iOS8 devide runtime error MetalKit Reason:imagenot found after the version M58](https://bugs.chromium.org/p/webrtc/issues/detail?id=7899#c3)

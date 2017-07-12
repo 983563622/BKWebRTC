@@ -339,11 +339,7 @@ static WebRTCHelper *shareInstance;
 - (RTCMediaConstraints *)_setupForLocalVideoConstraints
 {
     BKLog(@"");
-    NSDictionary *mandatory = @{kRTCMediaConstraintsMaxWidth : @"640",
-                                kRTCMediaConstraintsMinWidth : @"640",
-                                kRTCMediaConstraintsMaxHeight : @"480",
-                                kRTCMediaConstraintsMinHeight : @"480",
-                                kRTCMediaConstraintsMinFrameRate : @"25"};
+    NSDictionary *mandatory = @{kRTCMediaConstraintsMinFrameRate : @"20"};
     RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatory optionalConstraints:nil];
     return constraints;
 }
@@ -351,13 +347,9 @@ static WebRTCHelper *shareInstance;
 - (RTCMediaConstraints *)_setupForPeerVideoConstraints
 {
     BKLog(@"");
-    NSDictionary *mandatory = @{kRTCMediaConstraintsMaxWidth : @"640",
-                                kRTCMediaConstraintsMinWidth : @"640",
-                                kRTCMediaConstraintsMaxHeight : @"480",
-                                kRTCMediaConstraintsMinHeight : @"480",
-                                kRTCMediaConstraintsMinFrameRate : @"25"};
-    NSDictionary *optional = @{@"DtlsSrtpKeyAgreement" : kRTCMediaConstraintsValueTrue};
-    RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatory optionalConstraints:optional];
+    NSDictionary *mandatory = @{kRTCMediaConstraintsOfferToReceiveAudio : kRTCMediaConstraintsValueTrue,
+                                kRTCMediaConstraintsOfferToReceiveVideo : kRTCMediaConstraintsValueTrue};
+    RTCMediaConstraints *constraints = [[RTCMediaConstraints alloc] initWithMandatoryConstraints:mandatory optionalConstraints:nil];
     return constraints;
 }
 
@@ -636,7 +628,6 @@ static WebRTCHelper *shareInstance;
  */
 - (void)_receiveAnswer:(NSMutableDictionary *)resultDic
 {
-    BKLog(@"RemoteSDP:%@", resultDic);
     NSDictionary *dataDic = resultDic[@"data"];
     NSDictionary *sdpDic = dataDic[@"sdp"];
     NSString *sdp = sdpDic[@"sdp"];
